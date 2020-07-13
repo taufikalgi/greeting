@@ -5,10 +5,10 @@ import datetime
 def index(request):
 
   now = datetime.datetime.now()
-  morning_start = now.replace(hour = 0, minute=0)
-  noon_start = now.replace(hour = 11, minute=0)
-  afternoon_start = now.replace(hour = 16, minute=0)
-  night_start = now.replace(hour = 19, minute=0)
+  morning_start = now.replace(hour = 0, minute=0, second=0)
+  noon_start = now.replace(hour = 11, minute=0, second=0)
+  afternoon_start = now.replace(hour = 16, minute=0, second=0)
+  night_start = now.replace(hour = 19, minute=0, second=0)
 
   if (now < noon_start):
     word = 'Selamat pagi'
@@ -20,7 +20,8 @@ def index(request):
     word = 'Selamat malam'
 
   context = {
-    'greeting_word': word
+    'greeting_word': word,
+    'now': now.time()
   }
 
   return render(request, 'greeting/index.html', context)
