@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-import datetime
+import datetime, time
 
 def index(request):
 
@@ -10,18 +10,21 @@ def index(request):
   afternoon_start = now.replace(hour = 16, minute=0, second=0)
   night_start = now.replace(hour = 19, minute=0, second=0)
 
+  now_print = time.strftime('%H:%M:%S')
+
   if (now < noon_start):
-    word = 'Selamat pagi'
+    word = 'Good Morning, Monkey!'
   elif (now < afternoon_start):
-    word = 'Selamat siang'
+    word = 'Good Afternoon, Monkey!'
   elif (now < night_start):
-    word = 'Selamat sore'
+    word = 'Good Afternoon, Monkey!'
   else:
-    word = 'Selamat malam'
+    word = 'Good Evening, Monkey!'
 
   context = {
     'greeting_word': word,
-    'now': now.time()
+    'now': now.time(),
+    'now_print': now_print
   }
 
   return render(request, 'greeting/index.html', context)
